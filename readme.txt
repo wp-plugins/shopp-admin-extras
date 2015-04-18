@@ -3,7 +3,7 @@ Contributors: crunnells
 Tags: shopp, e-commerce
 Requires at least: 3.1
 Tested up to: 4.1
-Stable tag: 0.1.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Adds navigation links on the Orders page and allows you to edit the order status inside the Order page.
@@ -17,6 +17,11 @@ Adds navigation links on the Orders page and allows you to edit the order status
 Upload the Shopp Admin Extras plugin to your blog, then activate it. You're done!
 
 == Changelog ==
+
+= 1.0.1 =
+*Release Date - 17th April, 2015*
+
+* Yay, first bug report! Fixed a bug with the order status updater.
 
 = 1.0 =
 *Release Date - 16th April, 2015*
