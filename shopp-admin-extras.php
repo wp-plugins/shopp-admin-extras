@@ -3,7 +3,7 @@
 Plugin Name: Shopp Admin Extras
 Plugin URI: 
 Description: Adds navigation links on the Orders page and allows you to edit the order status inside the Order page.
-Version: 1.0
+Version: 1.0.1
 Author: Chris Runnells
 Author URI: http://chrisrunnells.com
 License: GPLv2 or later
@@ -55,21 +55,21 @@ class ShoppAdminExtras {
 
 	/* Prints the box content */
 	function order_status_box() {
-	
-		// Use nonce for verification
-		wp_nonce_field( plugin_basename( __FILE__ ), 'post_status_noncename' );
 
 		// snag the order status from the order object
 		$Purchase = ShoppPurchase();
 		$status = $Purchase->status;
 		$statusLabels = shopp_setting('order_status');
 
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id'] . '&page=' . $_GET['page'] . '">';
+		// Use nonce for verification
+		wp_nonce_field( plugin_basename( __FILE__ ), 'order_status_noncename' );
 		// create a select menu of Order Status'
 		echo '<select name="newstatus" id="newstatus">';
 		echo menuoptions($statusLabels,$status,true);
 		echo '</select> ';
 
-		echo '<button id="update-status-button" class="button-secondary" value="update" type="submit">Update</button>';
+		echo '<button id="update-status-button" class="button-secondary" value="update" type="submit">Update</button></form>';
 
 	}
 	
@@ -78,7 +78,7 @@ class ShoppAdminExtras {
 		if ( ! current_user_can('shopp_products') ) return;	
 
 		// Check if the user intended to change this value.
-		if ( ! isset( $_POST['post_status_noncename'] ) || ! wp_verify_nonce( $_POST['post_status_noncename'], plugin_basename( __FILE__ ) ) )
+		if ( ! isset( $_POST['order_status_noncename'] ) || ! wp_verify_nonce( $_POST['order_status_noncename'], plugin_basename( __FILE__ ) ) )
 			return;
 
 		//sanitize user input
